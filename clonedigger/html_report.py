@@ -67,7 +67,7 @@ class CPDXMLReport(Report):
 	f.write('<pmd-cpd>\n')
 	for clone in self._clones:	    
 	    token_numbers = [sum([s.getTokenCount() for s in clone[i]]) for i in (0,1)]
-	    f.write('<duplication no_of_lines="'+ str( max(clone[i].getCoveredLineNumbers()) - min(clone[i].getCoveredLineNumbers()))+'" lines="' + str(max([len(set(clone[i].getCoveredLineNumbers())) for i in [0,1]] )) + '" tokens="' + str(max(token_numbers)) +'">\n')
+	    f.write('<duplication no_of_lines="'+ str( 1+ max(clone[i].getCoveredLineNumbers()) - min(clone[i].getCoveredLineNumbers()))+'" lines="' + str(max([len(set(clone[i].getCoveredLineNumbers())) for i in [0,1]] )) + '" tokens="' + str(max(token_numbers)) +'">\n')
 	    for i in [0,1]:
 		f.write('<file line="' + str(1 + min(clone[i].getCoveredLineNumbers())) +  '" path="' + os.path.abspath(clone[i].getSourceFile().getFileName()) + '"/>\n')
 	    f.write('<codefragment>\n')
