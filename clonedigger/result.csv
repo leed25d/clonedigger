@@ -1,0 +1,289 @@
+--minimum-tokens is NOT a valid application name, valid options are:pmd, cpd, cpdgui, designer, bgastviewer
+Found a 30 line (199 tokens) duplication in the following files: 
+Starting at line 70 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/TableComponentControl.java
+Starting at line 70 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/TableInstanceControl.java
+
+                        + sb.GetInstanceName(getId()));
+            }
+
+            if (quantity == 0) {
+                selectionValues.remove(index);
+                ctrlValues.remove(index);
+            }
+
+            if (isUpdated()) {
+                LOGGER.debug("Updating table component control {}({}), " +
+                        "ctrlValues {}, selectionValues {}, modifiedRowComponent {}, modifiedRowValue {}",
+                        getDisplayName(), getId(), ctrlValues, selectionValues, componentID, quantity);
+
+                ctrlValues.stream().forEach(c -> sb.AppendMultiAttrValueComponent(ctrlAttrValue.getId(), c));
+                sb.SetInstanceAttrValue(getId(), ctrlAttrValue.getId());
+
+                selectionValues.stream().forEach(c -> sb.AppendMultiAttrValueFloat(selectionAttrValue.getId(), c));
+                sb.SetInstanceAttrValue(getId(), selectionAttrValue.getId());
+
+                sb.SetAttrValueComponent(modifiedRowComponent.getId(), componentID);
+                sb.SetInstanceAttrValue(getId(), modifiedRowComponent.getId());
+
+                sb.SetAttrValueFloat(modifiedRowValue.getId(), quantity);
+                sb.SetInstanceAttrValue(getId(), modifiedRowValue.getId());
+            }
+
+        }
+    }
+
+    private void populate(int id, SBProductBase pbID) {
+=====================================================================
+Found a 36 line (183 tokens) duplication in the following files: 
+Starting at line 50 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/integration-test/java/com/ignitetech/sbe/restserver/flow/PluginFlowSuite.java
+Starting at line 19 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/integration-test/java/com/ignitetech/sbe/restserver/flow/PowerIBMTestPlanSessionFlowSuite.java
+
+                        .checkPluginDeploymentStatus(filesOverWritten, filesOverWrittenPath)
+                        .createSession(pbID)
+                        .getCurrentWizard()
+                        .clickFinish()
+                        .checkEventResponseIsShowNone()
+                        .getPartsList()
+                        .addPartsListComponent("Model E880(9119-MHE)")
+                        .goToTab("Storage")
+                        .chooseOption("sq_load_source_combo", "(ELS0)-Boot From Existing Drive Specified")
+                        .goToTab("Products")
+                        .chooseOption("sq_preload_selection_control", "No Software")
+                        .clickFinish()
+                        .getMessageView()
+                        .executeMessageViewAction(
+                                "MUST READ: Once the system is installed and the proper DASD hardware "
+                                        + "for system boot is provided, customer must update the system records by indicating features "
+                                        + "and specify codes specific to the load source. Double click to view details and clear error.",
+                                "Show all MUST READ messages")
+                        .clickFinish()
+                        .getMessageView()
+                        .executeMessageViewAction(
+                                "This system requires access to a Hardware Management Console. Double click "
+                                        + "to view details. Right click for options.", "Have an HMC that will support configured server(s)")
+                        .getMessageView()
+                        .executeMessageViewAction("9119-MHE: Server 1: Summary of system memory: Total = 512 GB; Active = 256 GB", "Jump to Wizard")
+                        .goToTab("OS PCS").setTableRow("sq_os_partition_counter_table_control", 1, 8).clickFinish().getMessageView()
+                        .executeMessageViewAction("A final validation is required to complete this configuration", "Perform Final Validation")
+                        .getDiagramViewSVG().getDiagramView().
+                        checkDiagramObjectHeightEqualTo("Base rack PDU mirroring 7188", 5)
+                        .checkDiagramObjectShapeEqualTo("Base rack PDU mirroring 7188", "RECTANGLE")
+                        .checkDiagramTotalObjectCountEqualTo(82)
+                        .checkDiagramObjectLabelLocationEqualTo("Base rack PDU mirroring 7188", "DEFAULT")
+                        .checkDiagramObjectLabelOrientationEqualTo("Base rack PDU mirroring 7188", "UNKNOWN")
+                        .checkDiagramObjectXPosEqualTo("Base rack PDU mirroring 7188", 5)
+                        .checkDiagramObjectYPosEqualTo("Base rack PDU mirroring 7188", 0)
+                        .invokePluginGet("CFReport", "generate", null)
+=====================================================================
+Found a 19 line (181 tokens) duplication in the following files: 
+Starting at line 93 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/test/java/com/ignitetech/sbe/plugin/PluginDeploymentTest.java
+Starting at line 170 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/test/java/com/ignitetech/sbe/plugin/PluginDeploymentTest.java
+
+            assertEquals("Files over written ", 0, status.getFilesOverwritten().size());
+            assertEquals("No errors", 0, status.getErrors().size());
+
+            List<PluginData> deployed = status.getDeployed();
+            for (PluginData data : deployed) {
+                switch (data.getPluginName()) {
+                    case "SamplePlugin":
+                        assertEquals(1, data.getFunctions(PluginFunction.Method.GET).size());
+                        assertEquals(0, data.getFunctions(PluginFunction.Method.POST).size());
+                        break;
+                    case "sessionStore":
+                        assertEquals(3, data.getFunctions(PluginFunction.Method.GET).size());
+                        assertEquals(1, data.getFunctions(PluginFunction.Method.POST).size());
+                        break;
+                    default:
+                        assertEquals(1, data.getFunctions(PluginFunction.Method.GET).size());
+                        assertEquals(1, data.getFunctions(PluginFunction.Method.POST).size());
+                }
+            }
+=====================================================================
+Found a 18 line (139 tokens) duplication in the following files: 
+Starting at line 52 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/TableComponentControl.java
+Starting at line 52 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/TableInstanceControl.java
+
+                    SBUtil.getInstAttrValueMultiComponent(getPb().getId(), getId(), "ctrl_value_mC")));
+            int index = ctrlValues.indexOf(componentID);
+            if (index == -1) {
+                ctrlValues.add(componentID);
+                index = ctrlValues.size() - 1;
+            }
+
+            List<Float> selectionValues = new ArrayList<>(Floats.asList(
+                    SBUtil.getInstAttrValueMultiFloat(getPb().getId(), getId(), "selected_row_values_mF")));
+            if (index == selectionValues.size()) {
+                selectionValues.add((float) quantity);
+            } else if (index < selectionValues.size()) {
+                if (selectionValues.get(index) == quantity) {
+                    setUpdated(false);
+                }
+                selectionValues.set(index, (float) quantity);
+            } else {
+                throw new SBException("ctrl_value_mCI selected_row_values_mF not consistent for "
+=====================================================================
+Found a 24 line (137 tokens) duplication in the following files: 
+Starting at line 58 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/test/java/com/ignitetech/sbe/plugin/PluginClassCreationHelper.java
+Starting at line 113 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/test/java/com/ignitetech/sbe/plugin/PluginClassCreationHelper.java
+
+    public static void createSimplePluginClass() throws IOException {
+
+        FileUtils.deleteDirectory(new File("src/test/resources/generated/classes/com"));
+
+        Map<String, String> idents = new HashMap<>();
+        List<String> pluginFunctions = new ArrayList<>();
+
+        String pfunct = "simplePluginFunction";
+        pluginFunctions.add(pfunct);
+
+        idents.put(pfunct + "Method", "POST");
+        idents.put(pfunct + "FunctionName", "testFunction");
+        idents.put(pfunct + "Body", "response.body(\"Executed simplePluginFunction\");");
+        idents.put("PublicProperty", "public boolean loaded; public boolean unloaded;");
+        idents.put("OnLoadMethod", "@OnLoad public void onLoad() { loaded = true; }");
+        idents.put("OnUnloadMethod", "@OnUnload public void onUnload() {unloaded = true;} ");
+        idents.put("PluginName", "createdPlugin");
+        idents.put("PluginClassName", "CreatedPlugin");
+
+        PluginClassCreationHelper helper = new PluginClassCreationHelper();
+        helper.createPluginClass(idents, pluginFunctions);
+
+
+    }
+=====================================================================
+Found a 21 line (112 tokens) duplication in the following files: 
+Starting at line 25 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/main/java/com/ignitetech/sbe/plugin/classloader/PluginClassLoader.java
+Starting at line 116 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/main/java/com/ignitetech/sbe/plugin/classloader/PluginJar.java
+
+    protected Class loadClassFromBytes(byte[] classContents) {
+
+        Class claz = defineClass(null, classContents, 0, classContents.length);
+        if (claz == null) {
+            return null;
+        }
+
+        if (claz.getPackage() == null) {
+            int index = claz.getName().lastIndexOf('.');
+
+            String packageName;
+            if (index != -1) {
+                packageName = claz.getName().substring(0, index);
+            } else {
+                packageName = "";
+            }
+            definePackage(packageName, null, null, null, null, null, null, null);
+
+        }
+        return claz;
+    }
+=====================================================================
+Found a 34 line (95 tokens) duplication in the following files: 
+Starting at line 45 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/test/java/com/ignitetech/sbe/plugin/PluginDeploymentTest.java
+Starting at line 46 of /Users/Nilesh/Aline/Econfig/staging/sbe-plugin/src/test/java/com/ignitetech/sbe/plugin/PluginManagerTest.java
+
+    class TestPluginResponse extends PluginResponseImpl {
+
+        String body;
+
+        public TestPluginResponse(Response response) {
+            super(response);
+        }
+
+        public void body(String body) {
+            this.body = body;
+        }
+
+        public String body() {
+            return body;
+        }
+
+    }
+
+    class TestPluginRequest extends PluginRequestImpl {
+
+        Map<String, String> params;
+
+        public TestPluginRequest(Map<String, String> params) {
+            super(null);
+            this.params = params;
+        }
+
+        public String queryParams(String name) {
+            return params.get(name);
+        }
+    }
+
+
+    @Test
+=====================================================================
+Found a 8 line (85 tokens) duplication in the following files: 
+Starting at line 125 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/TableComponentControl.java
+Starting at line 124 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/TableInstanceControl.java
+
+    private void populateData(HashMap<Integer, TableControlData> ctrl_value_mC, List<Integer> validComponents, List<String> bufferValidValues) {
+        for (int i = 0; i < validComponents.size(); i++) {
+            TableControlData newRow = new TableControlData();
+            int id = validComponents.get(i);
+            newRow.setId(id);
+            newRow.setQuantity(0);
+            newRow.setInvalid(false);
+            newRow.setDescription(StringHelper.refine(bufferValidValues.get(i), getDelimeter()));
+=====================================================================
+Found a 6 line (83 tokens) duplication in the following files: 
+Starting at line 87 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/MultivaluedComponentControl.java
+Starting at line 85 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/MultivaluedInstanceControl.java
+
+    private void populateData(Map<Integer, GenericData> ctrl_value_mC, List<Integer> validValues, List<Integer> candidateValues, List<String> bufferValidValues, List<String> bufferCandidateValues) {
+        for (int i = 0; i < validValues.size(); i++) {
+            GenericData newRow = new GenericData();
+            int id = validValues.get(i);
+            newRow.setId(id);
+            newRow.setDescription(StringHelper.refine(bufferValidValues.get(i), delimeter));
+=====================================================================
+Found a 9 line (80 tokens) duplication in the following files: 
+Starting at line 58 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/SinglevaluedComponentControl.java
+Starting at line 54 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/wizard/controls/SinglevaluedInstanceControl.java
+
+        this.isDoubleClick = isDoubleClick;
+    }
+
+    private void populateMetaData() {
+        int systemID = sb.GetInstanceSystem(getId());
+        try (AttributeValue avID = AttributeValue.of(sb.EvaluateExpressionInContext(getId(), "?this.model_defined_headers_S()", systemID))) {
+            String header = sb.GetAttrValueString(avID.getId());
+            metaData.setColumnNames(StringHelper.refine(header, delimeter));
+        } catch (SBException e) {
+=====================================================================
+Found a 7 line (78 tokens) duplication in the following files: 
+Starting at line 247 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/integration-test/java/com/ignitetech/sbe/restserver/model/Controls.java
+Starting at line 380 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/integration-test/java/com/ignitetech/sbe/restserver/model/Controls.java
+
+    private ControlDefinition chooseOptionInternal(Level level, String componentName, int selectedIndex) {
+        return (json) -> {
+            Object document = Configuration.defaultConfiguration().jsonProvider().parse(json);
+            String controlPath = getControlPath(document, level, componentName);
+            int id = JsonPath.parse(document).read(controlPath + ".id");
+            String type = JsonPath.parse(document).read(controlPath + ".type");
+            int dataID = JsonPath.parse(document).read(controlPath + ".data[" + selectedIndex + "].id");
+=====================================================================
+Found a 3 line (78 tokens) duplication in the following files: 
+Starting at line 28 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/attributes/SBDataType.java
+Starting at line 50 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/main/java/com/ignitetech/sbe/restserver/model/attributes/SBDataType.java
+
+            sb.GetAttrValueDate(attributeValueID, year, month, day, hour, min, sec);
+            return (year[0] == 0 || month[0] == 0 || day[0] == 0) ? null : LocalDateTime.of(year[0], month[0], day[0], hour[0], min[0], sec[0]);
+    }),
+=====================================================================
+Found a 8 line (76 tokens) duplication in the following files: 
+Starting at line 225 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/integration-test/java/com/ignitetech/sbe/restserver/model/Controls.java
+Starting at line 345 of /Users/Nilesh/Aline/Econfig/staging/sbe-restserver/src/integration-test/java/com/ignitetech/sbe/restserver/model/Controls.java
+
+    private ControlDefinition chooseSingleOptionInternal(Level level, String componentName, String chosenDescription) {
+        return (json) -> {
+            Object document = Configuration.defaultConfiguration().jsonProvider().parse(json);
+            String controlPath = getControlPath(document, level, componentName);
+            int id = JsonPath.parse(document).read(controlPath + ".id");
+            String type = JsonPath.parse(document).read(controlPath + ".type");
+
+            Preconditions.checkState(type.startsWith("Singlevalued") || type.startsWith("Enabling"),"Not a single valued component!");
+
