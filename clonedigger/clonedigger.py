@@ -33,6 +33,7 @@ import arguments
 import html_report
 
 def main():
+    sys.setrecursionlimit(100000)
     cmdline = OptionParser(usage="""To run Clone Digger type:
 python clonedigger.py [OPTION]... [SOURCE FILE OR DIRECTORY]...
 
