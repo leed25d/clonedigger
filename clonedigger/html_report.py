@@ -85,6 +85,8 @@ class CPDXMLReport(Report):
                 t = '\t<diffWord>'
                 replace_word = word[2:]
                 sign = word[0]
+                if i >= len(diffWords) :
+                    break
                 nextWord = diffWords[i+1]
                 while nextWord[0] == sign :
                     replace_word += " " + nextWord[2:]
@@ -98,6 +100,8 @@ class CPDXMLReport(Report):
                     i += 1
                     replace_word = nextWord[2:]
                     sign = nextWord[0]
+                    if i >= len(diffWords) :
+                        break
                     nextWord = diffWords[i+1]
                     while nextWord[0] == sign :
                         replace_word += " " + nextWord[2:]
