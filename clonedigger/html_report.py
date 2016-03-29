@@ -107,7 +107,7 @@ class CPDXMLReport(Report):
                 t += '</diffWord>\n'
                 r += t
             i += 1
-        r += '<diffWords>'
+        r += '</diffWords>\n'
         return r
 
     def writeReport(self, file_name):
