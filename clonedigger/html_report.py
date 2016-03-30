@@ -114,6 +114,9 @@ class CPDXMLReport(Report):
                         if i >= len(diffWords)-1 :
                             break
                         nextWord = diffWords[i+1]
+
+                    replace_word = replace_word.replace("<" , " ")
+                    replace_word = replace_word.replace(">" , " ")
                     t += '<replaced> '+ replace_word +' </replaced>'
                 else:
                     t += '<replaced>  </replaced>'
