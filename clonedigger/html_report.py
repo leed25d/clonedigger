@@ -94,6 +94,11 @@ class CPDXMLReport(Report):
                     if i >=  len(diffWords)-1 :
                         break
                     nextWord = diffWords[i+1]
+                if replace_word.strip() == '':
+                    break
+
+                replace_word = replace_word.replace("<" , " ")
+                replace_word = replace_word.replace(">" , " ")
 
                 t += '<original> '+ replace_word +' </original>'
                 if nextWord[0] == '-' or  nextWord[0] == '+':
