@@ -97,10 +97,7 @@ class CPDXMLReport(Report):
                 if replace_word.strip() == '':
                     break
 
-                replace_word = replace_word.replace("<" , " ")
-                replace_word = replace_word.replace(">" , " ")
-
-                t += '<original> '+ replace_word +' </original>'
+                t += '<original> <![CDATA[ '+ replace_word +' ]]> </original>'
                 if nextWord[0] == '-' or  nextWord[0] == '+':
                     i += 1
                     replace_word = nextWord[2:]
@@ -115,9 +112,7 @@ class CPDXMLReport(Report):
                             break
                         nextWord = diffWords[i+1]
 
-                    replace_word = replace_word.replace("<" , " ")
-                    replace_word = replace_word.replace(">" , " ")
-                    t += '<replaced> '+ replace_word +' </replaced>'
+                    t += '<replaced> <![CDATA[ '+ replace_word +' ]]> </replaced>'
                 else:
                     t += '<replaced>  </replaced>'
                 t += '</diffWord>\n'
