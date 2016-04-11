@@ -77,43 +77,47 @@ class CPDXMLReport(Report):
     @staticmethod
     def getDiffWords(delta):
         diffWords = list(delta)
+        diffWords = diffWords[3:]
         r = '<diffWords>\n'
         i = 0
         while i < (len(diffWords)-1):
             word = diffWords[i]
             if word[0] == '-' or word[0] == '+' :
                 t = '\t<diffWord>'
-                replace_word = word[2:]
+                replace_word = word[1:]
                 sign = word[0]
-                if i >= len(diffWords) - 1 :
+                i += 1
+                if i >= len(diffWords) :
                     break
-                nextWord = diffWords[i+1]
+                nextWord = diffWords[i]
                 while nextWord[0] == sign :
                     replace_word += " " + nextWord[2:]
                     i += 1
-                    if i >=  len(diffWords)-1 :
+                    if i >=  len(diffWords) :
                         break
-                    nextWord = diffWords[i+1]
+                    nextWord = diffWords[i]
                 if replace_word.strip() == '':
                     i += 1
                     continue
 
                 t += '<original> <![CDATA[ '+ replace_word +' ]]> </original>'
                 if nextWord[0] == '-' or  nextWord[0] == '+':
-                    i += 1
-                    replace_word = nextWord[2:]
+                    replace_word = nextWord[1:]
                     sign = nextWord[0]
-                    if i >= len(diffWords)-1 :
-                        break
-                    nextWord = diffWords[i+1]
-                    while nextWord[0] == sign :
-                        replace_word += " " + nextWord[2:]
-                        i += 1
-                        if i >= len(diffWords)-1 :
-                            break
-                        nextWord = diffWords[i+1]
+                    i += 1
+                    if i >= len(diffWords):
+                        t += '<replaced> <![CDATA[ '+ replace_word +' ]]> </replaced>'
+                    else:
+                        nextWord = diffWords[i]
+                        while nextWord[0] == sign :
+                            replace_word += " " + nextWord[1:]
+                            i += 1
+                            if i >= len(diffWords) :
+                                t += '<replaced> <![CDATA[ '+ replace_word +' ]]> </replaced>'
+                                break
+                            nextWord = diffWords[i]
 
-                    t += '<replaced> <![CDATA[ '+ replace_word +' ]]> </replaced>'
+                        t += '<replaced> <![CDATA[ '+ replace_word +' ]]> </replaced>'
                 else:
                     t += '<replaced>  </replaced>'
                 t += '</diffWord>\n'
@@ -137,9 +141,9 @@ class CPDXMLReport(Report):
                 max([len(set(clone[i].getCoveredLineNumbers())) for i in [0, 1]])) + '" tokens="' + str(
                 max(token_numbers)) + '">\n'  )
             # Write different Words
-            data1_words = "".join(data1).split(" ")
-            data2_words = "".join(data2).split(" ")
-            delta = difflib.ndiff(data1_words , data2_words )
+            data1_text = [ str(line).strip() for line in data1]
+            data2_text = [ str(line).strip() for line in data2]
+            delta = difflib.unified_diff(data1_text, data2_text)
             diff_words = CPDXMLReport.getDiffWords(delta)
             f.write(diff_words+'\n')
             for i in [0, 1]:
