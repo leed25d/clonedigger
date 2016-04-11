@@ -95,7 +95,8 @@ class CPDXMLReport(Report):
                         break
                     nextWord = diffWords[i+1]
                 if replace_word.strip() == '':
-                    break
+                    i += 1
+                    continue
 
                 t += '<original> <![CDATA[ '+ replace_word +' ]]> </original>'
                 if nextWord[0] == '-' or  nextWord[0] == '+':
