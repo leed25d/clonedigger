@@ -84,6 +84,7 @@ class CPDXMLReport(Report):
             word = diffWords[i]
             if word[0] == '-' or word[0] == '+' :
                 t = '\t<diffWord>'
+                lines = 1
                 replace_word = word[1:]
                 sign = word[0]
                 i += 1
@@ -93,6 +94,7 @@ class CPDXMLReport(Report):
                 while nextWord[0] == sign :
                     replace_word += " " + nextWord[2:]
                     i += 1
+                    lines += 1
                     if i >=  len(diffWords) :
                         break
                     nextWord = diffWords[i]
@@ -100,7 +102,7 @@ class CPDXMLReport(Report):
                     i += 1
                     continue
 
-                t += '<original> <![CDATA[ '+ replace_word +' ]]> </original>'
+                t += '<original lines="'+str(lines)+'"> <![CDATA[ '+ replace_word +' ]]> </original>'
                 if nextWord[0] == '-' or  nextWord[0] == '+':
                     replace_word = nextWord[1:]
                     sign = nextWord[0]
