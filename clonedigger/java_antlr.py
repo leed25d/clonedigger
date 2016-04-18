@@ -29,7 +29,6 @@ import xml.parsers.expat
 
 from .abstract_syntax_tree import *
 
-
 class JavaANTLRSourceFile (SourceFile):
     extension = 'java'
     size_threshold = 10
@@ -62,10 +61,17 @@ class JavaANTLRSourceFile (SourceFile):
 
         tree_file_name = 'temporary_ast.xml'
         current_directory = os.path.realpath(os.path.dirname(__file__))
-        producer_class_path = os.path.join(
-            current_directory, 'java_antlr', 'TreeProducer.jar')
-        antlr_class_path = os.path.join(
-            current_directory, 'antlr_runtime', 'runtime-2008-01-10.16.jar')
+        java8 = False
+        if not java8:
+            producer_class_path = os.path.join(
+                current_directory, 'java_antlr', 'TreeProducer.jar')
+            antlr_class_path = os.path.join(
+                current_directory, 'antlr_runtime', 'runtime-2008-01-10.16.jar')
+        else:
+            producer_class_path = os.path.join(
+                current_directory, 'java8_antlr', 'TreeProducer-8.jar')
+            antlr_class_path = os.path.join(
+                current_directory, 'java8_antlr', 'antlr_jars', 'antlr-runtime-4.5.3.jar')
         if os.name in ['mac', 'posix']:
             class_path_delimeter = ':'
         elif os.name in ['nt', 'dos', 'ce']:
