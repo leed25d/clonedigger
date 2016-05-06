@@ -138,8 +138,7 @@ class CPDXMLReport(Report):
             data1 = clone[0].getSourceLines()
             data2 = clone[1].getSourceLines()
 
-            f.write('<duplication no_of_lines="' + str(
-                1 + max(clone[i].getCoveredLineNumbers()) - min(clone[i].getCoveredLineNumbers())) + '" lines="' + str(
+            f.write('<duplication lines="' + str(
                 max([len(set(clone[i].getCoveredLineNumbers())) for i in [0, 1]])) + '" tokens="' + str(
                 max(token_numbers)) + '">\n'  )
             # Write different Words
@@ -149,8 +148,10 @@ class CPDXMLReport(Report):
             diff_words = CPDXMLReport.getDiffWords(delta)
             f.write(diff_words+'\n')
             for i in [0, 1]:
-                f.write('<file line="' + str(1 + min(clone[i].getCoveredLineNumbers())) + '" path="' + os.path.abspath(
-                    clone[i].getSourceFile().getFileName()) + '"/>\n')
+                f.write('<file no_of_lines="' + str(
+                1 + max(clone[i].getCoveredLineNumbers()) - min(clone[i].getCoveredLineNumbers())) + '" line="' + 
+                str(1 + min(clone[i].getCoveredLineNumbers())) + '" path="' + os.path.abspath(clone[i].getSourceFile().getFileName()) + 
+                '"/>\n')
             f.write('<codefragment>\n')
             f.write('<![CDATA[\n')
             for line in clone[0].getSourceLines():
