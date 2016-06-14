@@ -48,8 +48,10 @@ class JavaANTLRSourceFile (SourceFile):
                 self.stack.pop()
 
         tree_file_name  = 'temporary_ast.xml'
-        producer_class_path = os.path.join('.','java_antlr', 'TreeProducer.jar')
-        antlr_class_path = os.path.join('.','antlr_runtime','runtime-2008-01-10.16.jar')
+        # producer_class_path = os.path.join('.','java_antlr', 'TreeProducer.jar')
+        # antlr_class_path = os.path.join('.','antlr_runtime','runtime-2008-01-10.16.jar')
+        producer_class_path = os.path.join('.','java8', 'TreeProducer-8.jar')
+        antlr_class_path = os.path.join('.','java8', 'antlr_jars','antlr-runtime-4.5.3.jar')
         if os.name in ['mac', 'posix']:
             class_path_delimeter = ':'
         elif os.name in ['nt', 'dos', 'ce']:
