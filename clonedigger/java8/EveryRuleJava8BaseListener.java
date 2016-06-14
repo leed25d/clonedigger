@@ -22,7 +22,7 @@ public class EveryRuleJava8BaseListener implements Java8Listener {
     private final MyAstNode startNode;
     private final Set<String> statementRules = new HashSet<>(Arrays.asList("classdeclaration", "methoddeclaration", "block", "localvariabledeclaration", "statement"));
     private final Set<String> preserveLiteralRules = new HashSet<>(Arrays.asList("interfaceModifier", "classModifier", "fieldModifier"));
-    private final Set<String> interestedRules = new HashSet<>(Arrays.asList("compilationUnit", "packageDeclaration", "singleTypeImportDeclaration", "singleStaticImportDeclaration", "typeImportOnDemandDeclaration", "singleStaticImportDeclaration", "staticImportOnDemandDeclar    ation", "interfaceModifier", "classModifier", "fieldModifier", "classDeclaration", "typeParameters", "typeBound", "enumDeclaration", "enumBody", "enumConstant", "enumBodyDeclarations", "interfaceDec    laration", "classBody", "interfaceBody", "staticInitializer", "instanceInitializer", "fieldDeclaration", "methodDeclaration", "constructorDeclaration", "variableDeclarator", "constantDeclaration", "arrayInitializer", "constructorBody", "typeArguments", "wildcard", "formalParameterList", "formalParameters", "lastFormalParameter", "normalAnnotation", "singleElementAnnotation", "markerAnnotation"    , "elementValuePair", "elementValueArrayInitializer", "annotationTypeDeclaration", "annotationTypeBody", "annotationTypeElementDeclaration", "block", "localVariableDeclaration", "assertStatement", "    emptyStatement", "expressionStatement", "switchBlockStatementGroup", "basicForStatement", "forInit", "statementExpressionList", "enhancedForStatement", "forUpdate", "castExpression", "arrayAccess",     "argumentList"));
+    private final Set<String> interestedRules = new HashSet<>(Arrays.asList("compilationUnit", "packageDeclaration", "singleTypeImportDeclaration", "singleStaticImportDeclaration", "typeImportOnDemandDeclaration", "singleStaticImportDeclaration", "staticImportOnDemandDeclar    ation", "interfaceModifier", "classModifier", "fieldModifier", "classDeclaration", "typeParameters", "typeBound", "enumDeclaration", "enumBody", "enumConstant", "enumBodyDeclarations", "interfaceDec    laration", "classBody", "interfaceBody", "staticInitializer", "instanceInitializer", "fieldDeclaration", "methodDeclaration", "constructorDeclaration", "variableDeclarator", "constantDeclaration", "arrayInitializer", "constructorBody", "typeArguments", "wildcard", "formalParameterList", "formalParameters", "lastFormalParameter", "normalAnnotation", "singleElementAnnotation", "markerAnnotation"    , "elementValuePair", "elementValueArrayInitializer", "annotationTypeDeclaration", "annotationTypeBody", "annotationTypeElementDeclaration", "block", "localVariableDeclaration", "assertStatement", "    emptyStatement", "expressionStatement", "switchBlockStatementGroup", "basicForStatement", "forInit", "statementExpressionList", "enhancedForStatement", "forUpdate", "castExpression", "arrayAccess", "argumentList"));
     EveryRuleJava8BaseListener(MyAstNode start) {
         this.startNode = start;
     }
@@ -2954,8 +2954,8 @@ public class EveryRuleJava8BaseListener implements Java8Listener {
         
         String result = ""; 
         if (astNodeAncestors.isEmpty()) {
-            System.out.println("Error condition parents empty!!");
-            System.out.println("Entering void enterEveryRule(ParserRuleContext ctx): " + depth + " >> start:(" + getTokenStr(ctx.getStart()) + ") - stop:(" + getTokenStr(ctx.getStop()) + "): " + Java8Parser.ruleNames[ctx.getRuleIndex()]);  
+            //System.out.println("Error condition parents empty!!");
+            //System.out.println("Entering void enterEveryRule(ParserRuleContext ctx): " + depth + " >> start:(" + getTokenStr(ctx.getStart()) + ") - stop:(" + getTokenStr(ctx.getStop()) + "): " + Java8Parser.ruleNames[ctx.getRuleIndex()]);  
             return;
         }
         String ruleName = Java8Parser.ruleNames[ctx.getRuleIndex()];
@@ -2989,7 +2989,7 @@ public class EveryRuleJava8BaseListener implements Java8Listener {
 
                 if (!parent.getChildren().isEmpty()) {
                     String spaces = String.format("%" + depth + "d", 0).replace("0", " ");
-                    System.out.println(spaces + depth + ">>" + result + " > " + Java8Parser.ruleNames[ctx.getRuleIndex()]);
+                    // System.out.println(spaces + depth + ">>" + result + " > " + Java8Parser.ruleNames[ctx.getRuleIndex()]);
                 }
             }
         }
